@@ -16,12 +16,12 @@ var cors = require('cors')
 //   origin: 'http://localhost:3000',
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
-//app.use(cors())
+app.use(cors())
 //Root Endpoint
 app.get('/', (request, response) => {
 
     response.json({ info: 'Node.js, Express, and Postgres API' })
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    //response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   })
 
   app.listen(port, () => {
@@ -29,9 +29,9 @@ app.get('/', (request, response) => {
   })
 
 const db = require('./querries')
-
+//prepei na kanw enable to acao
 app.get('/employees', db.getUsers)
-//app.get('/users/:id', db.getUserById)
+app.get('/employee/:id', db.getUserById)
 app.post('/employee', db.createUser)
 app.put('/employee/:id', db.updateUser)
 app.delete('/employee/:id', db.deleteUser)

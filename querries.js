@@ -22,6 +22,19 @@ const getUsers = async(request, response) => {
     })
     console.log('async query finished')
 }
+
+const getUserById = async(request, response) => {
+  const id = parseInt(request.params.id)
+  await pool.query(
+    'SELECT * FROM Employee WHERE id = $1' ,[id], (error,results) => {
+      if(error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+      console.log('Employee with id'+ id);
+    })
+}
+
 //POST a new employee
  const  createUser = async(request, response) => {
     //We create the body of the request(what we will Post)
@@ -69,4 +82,5 @@ const deleteUser = async(request, response) => {
     createUser,
     updateUser,
     deleteUser,
+    getUserById
   }
