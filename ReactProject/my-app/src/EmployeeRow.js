@@ -5,10 +5,10 @@ function EmployeeRow(props) {
      
     return(
         <>
-        <td contenteditable="true">{props.LastName}</td>
-        <td contenteditable="false">{props.FirstName}</td>
-        <td contenteditable="false">{props.BirthDate}</td>
-        <td contenteditable="false">{props.isActive}</td>
+        <td>{props.LastName}</td>
+        <td>{props.FirstName}</td>
+        <td>{props.BirthDate}</td>
+        <td>{props.is_active ? 'Yes' : 'No'}</td>
         </>                 
     )
 

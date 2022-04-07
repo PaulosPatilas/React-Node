@@ -12,7 +12,7 @@ const pool = new Pool({
 })
 
 //GET all employees
-const getUsers = async(request, response) => {
+const getEmployees = async(request, response) => {
     console.log('starting async query')
     await pool.query('SELECT * FROM Employee ORDER BY id ASC', (error, results) => {
       if (error) {
@@ -23,7 +23,7 @@ const getUsers = async(request, response) => {
     console.log('async query finished')
 }
 
-const getUserById = async(request, response) => {
+const getEmployeeById = async(request, response) => {
   const id = parseInt(request.params.id)
   await pool.query(
     'SELECT * FROM Employee WHERE id = $1' ,[id], (error,results) => {
@@ -36,23 +36,24 @@ const getUserById = async(request, response) => {
 }
 
 //POST a new employee
- const  createUser = async(request, response) => {
+ const  createEmployee = async(request, response) => {
     //We create the body of the request(what we will Post)
-    const { last_name = 'Patilas', first_name = 'Georgios', is_active = true, date_of_birth = '03/08/1997' } = request.body
+    const { last_name, first_name, is_active, date_of_birth } = request.body
   
     await pool.query('INSERT INTO Employee (last_name, first_name, is_active, date_of_birth) VALUES ($1, $2, $3, $4)', [last_name, first_name, is_active, date_of_birth], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`User added with ID: ${results.insertId}`)
+      response.status(201).send(`User added with ID: ${response.insertId}`)
     })
 }
 
 //UPDATE an existing Employee
-const updateUser = async(request, response) => {
+const updateEmployee = async(request, response) => {
     const id = parseInt(request.params.id)
-    const { last_name = 'Patilas', first_name = 'Georgios', is_active = false, date_of_birth = '04/08/1997' } = request.body
-  
+    console.log(id);
+    const {last_name, first_name, is_active, date_of_birth } = request.body;
+    console.log(request);
     await pool.query(
       'UPDATE Employee SET last_name = $1, first_name = $2, is_active = $3, date_of_birth = $4 WHERE id = $5',
       [last_name, first_name, is_active, date_of_birth, id],
@@ -60,13 +61,14 @@ const updateUser = async(request, response) => {
         if (error) {
           throw error
         }
-        response.status(200).send(`User modified with ID: ${id}`)
+        response.status(200).send(`User modified with ID: ${id}` + request.body)
       }
     )
+    console.log('DONE');
 }
 
 //DELETE an Employee
-const deleteUser = async(request, response) => {
+const deleteEmployee = async(request, response) => {
     const id = parseInt(request.params.id)
   
     await pool.query('DELETE FROM Employee WHERE id = $1', [id], (error, results) => {
@@ -78,9 +80,9 @@ const deleteUser = async(request, response) => {
   }
 
   module.exports = {
-    getUsers,
-    createUser,
-    updateUser,
-    deleteUser,
-    getUserById
+    getEmployees,
+    createEmployee,
+    updateEmployee,
+    deleteEmployee,
+    getEmployeeById
   }

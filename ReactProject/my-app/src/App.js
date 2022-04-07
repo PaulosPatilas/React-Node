@@ -1,31 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
-import Table from './EmployeeTable';
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeTable from './EmployeeTable';
+import EmployeeAddition from './EmployeeAddition';
 
 function App() {
   return (
-    <>
-    <Router>
+    <div className="App">
       <Routes>
-        <Route path='/' exact={true} element={<EmployeeTable/>}/>
-        <Route path='/employee/:id' element={<EmployeeUpdate/>}/>
+        <Route exact={true} path='/' element={<EmployeeTable/>}/>
+        <Route exact={true} path='/employee/:id' element={<EmployeeUpdate/>}/>
+        <Route exact={true} path='/createEmployee' element={<EmployeeAddition/>}/>
+        <Route
+          path="*"
+          element={
+          <main style={{ padding: "1rem" }}>
+            <p>There's nothing here!</p>
+          </main>
+          }
+    />
+        {/* <Route
+        path="/redirect"
+        element={<Navigate to="/" replace={true} />}
+      /> */}
       </Routes>
-    </Router>
-    {/* <div className="App">
-      <header className="App-header">
-        My first React-Node CRUD App
-      </header>
-      <div className='container'>
-        <EmpoyeeAddition/>
-        <Table/>
-      </div>
-      
-    </div> */}
-    </>
+    </div>
   );
 }
 

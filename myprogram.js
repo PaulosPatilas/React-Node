@@ -5,12 +5,13 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 8080
 
-// app.use(bodyParser.json())
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: true,
-//   })
-// )
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
+app.use(express.json());
 var cors = require('cors')
 // var corsOptions = {
 //   origin: 'http://localhost:3000',
@@ -30,11 +31,11 @@ app.get('/', (request, response) => {
 
 const db = require('./querries')
 //prepei na kanw enable to acao
-app.get('/employees', db.getUsers)
-app.get('/employee/:id', db.getUserById)
-app.post('/employee', db.createUser)
-app.put('/employee/:id', db.updateUser)
-app.delete('/employee/:id', db.deleteUser)
+app.get('/employees', db.getEmployees)
+app.get('/employee/:id', db.getEmployeeById)
+app.post('/employee', db.createEmployee)
+app.put('/employee/:id', db.updateEmployee)
+app.delete('/employee/:id', db.deleteEmployee)
 // const { Client } = require('pg')
 // const client = new  Client()
 
