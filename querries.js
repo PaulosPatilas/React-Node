@@ -4,10 +4,10 @@
 //in a separate file with restrictive permissions that is not accessible from version control
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'pavlos',
+  user: 'postgres',
   host: 'localhost',
   database: 'knowledge',
-  password: '1997PP11',
+  password: '12345',
   port: 5432,
 })
 
@@ -79,7 +79,20 @@ const deleteEmployee = async(request, response) => {
     })
   }
 
+  const createUser = async(request,response) => {
+    
+    const {username,password} = request.body
+
+    await pool.query('INSERT INTO Users VALUES($1,$2)',[username,password],(error,results) =>{
+      if (error) {
+        throw error
+      }
+      response.status(200).send('User added. Welcome !!')
+    })
+  }
+
   module.exports = {
+    createUser,
     getEmployees,
     createEmployee,
     updateEmployee,

@@ -1,16 +1,20 @@
 import './App.css';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeTable from './EmployeeTable';
 import EmployeeAddition from './EmployeeAddition';
+import Registration from './Registration';
+import Login from './Login';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact={true} path='/' element={<EmployeeTable/>}/>
+        <Route exact={true} path='/home' element={<EmployeeTable/>}/>
+        <Route exact = {true} path='/' element={<Login/>}/>
         <Route exact={true} path='/employee/:id' element={<EmployeeUpdate/>}/>
         <Route exact={true} path='/createEmployee' element={<EmployeeAddition/>}/>
+        <Route exact={true} path='/registration' element={<Registration/>}/>
         <Route
           path="*"
           element={
@@ -18,11 +22,7 @@ function App() {
             <p>There's nothing here!</p>
           </main>
           }
-    />
-        {/* <Route
-        path="/redirect"
-        element={<Navigate to="/" replace={true} />}
-      /> */}
+        />
       </Routes>
     </div>
   );

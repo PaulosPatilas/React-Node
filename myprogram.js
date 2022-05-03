@@ -36,6 +36,7 @@ app.get('/employee/:id', db.getEmployeeById)
 app.post('/employee', db.createEmployee)
 app.put('/employee/:id', db.updateEmployee)
 app.delete('/employee/:id', db.deleteEmployee)
+app.post('/userRegistry', db.createUser)
 // const { Client } = require('pg')
 // const client = new  Client()
 
