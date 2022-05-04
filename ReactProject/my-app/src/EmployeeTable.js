@@ -1,4 +1,4 @@
-import React,{useState,useEffect, useRef} from 'react'
+import React,{useState,useEffect} from 'react'
 import EmployeeRow from './EmployeeRow';
 import EmpoyeeAddition from './EmployeeAddition';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,13 @@ function EmployeeTable() {
 
   useEffect(() => {
     
-      fetch('http://localhost:8080/employees', {mode:'cors'})
+      fetch('http://localhost:8080/employees',
+        {
+         mode:'cors',
+         headers:{
+           "x-access-token": localStorage.getItem("token")
+          }
+        })
       .then(response => {
         return response.json()
       })

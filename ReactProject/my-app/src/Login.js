@@ -21,27 +21,28 @@ function Login(){
         console.log(event.target.name)
         console.log(event.target.value)
         setUser({...user, [event.target.name]:event.target.value})
-      }
+    }
   
     async function handleSubmit(e){
         e.preventDefault();
         console.log("works")
         await fetch('http://localhost:8080/login',
-        {
-        mode:'cors',
-        method: 'POST',
-        headers: { 
-          'accept': 'application/json',
-          'content-type': 'application/json'
-        },
-        body:JSON.stringify(user)
-      })
-      .then((response)=>response.json())
-      .then((data)=>{
-          console.log(data)
-          data.auth ? setLogged(true) : setLogged(false)     
-      })
-      console.log("User log in")
+            {
+            mode:'cors',
+            method: 'POST',
+            headers: { 
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then((response)=>response.json())
+        .then((data)=>{
+            console.log(data)
+            setLogged(data.auth)   
+            localStorage.setItem('token', data.token)
+        })
+        console.log("User log in")
     }
 
     return (
@@ -66,7 +67,7 @@ function Login(){
             </Form>
             <p>Not registered yet? <a href='/registration'> Do It Now!</a></p>
 
-            {isLogged && <Button href='/home ' >Check if Authenticated </Button>}
+            {isLogged && <Button href='/home'>Check if Authenticated </Button>}
             </Container>         
         </div>
     )
