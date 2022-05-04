@@ -3,7 +3,11 @@ import { Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 
 function Registration(){
 
-    const [user,setUser] = useState(newUser)
+    const [user,setUser] = useState({
+      username:"",
+      password:""
+  }
+)
     var newUser={
         username:"",
         password:""
@@ -50,12 +54,12 @@ function Registration(){
             </FormGroup>
             <FormGroup>
               <Label for="password">Password</Label>
-              <Input type="text" name="password" id="password" value={user.password || ''}
+              <Input type="password" name="password" id="password" value={user.password || ''}
                 onChange={(e) => {handleChange(e)}} autoComplete="password"/>
               </FormGroup>          
               <FormGroup>
                 <Button outline color="primary" type="submit">Sign Up</Button>
-                <Button outline color="secondary" to="/">Cancel</Button>
+                <Button outline color="secondary" href="/">Cancel</Button>
               </FormGroup>
             </Form>
           </Container>

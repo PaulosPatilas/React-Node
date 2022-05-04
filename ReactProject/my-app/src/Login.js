@@ -9,6 +9,9 @@ function Login(){
         password: ""
     });
 
+    const [isLogged,setLogged] = useState(false)
+
+    
     // var user = {
     //     username: "",
     //     password: ""
@@ -19,9 +22,26 @@ function Login(){
         console.log(event.target.value)
         setUser({...user, [event.target.name]:event.target.value})
       }
-
-    function handleSubmit(){
-
+  
+    async function handleSubmit(e){
+        e.preventDefault();
+        console.log("works")
+        await fetch('http://localhost:8080/login',
+        {
+        mode:'cors',
+        method: 'POST',
+        headers: { 
+          'accept': 'application/json',
+          'content-type': 'application/json'
+        },
+        body:JSON.stringify(user)
+      })
+      .then((response)=>response.json())
+      .then((data)=>{
+          console.log(data)
+          data.auth ? setLogged(true) : setLogged(false)     
+      })
+      console.log("User log in")
     }
 
     return (
@@ -39,12 +59,14 @@ function Login(){
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
-                    <Input type="text" name="password" id="password" value={user.password || ''}
+                    <Input type="password" name="password" id="password" value={user.password || ''}
                     onChange={(e) => {handleChange(e)}} autoComplete="password"/>
                 </FormGroup>          
                 <Button variant='outlined' color="primary" type="submit">LogIn</Button>     
             </Form>
             <p>Not registered yet? <a href='/registration'> Do It Now!</a></p>
+
+            {isLogged && <Button href='/home ' >Check if Authenticated </Button>}
             </Container>         
         </div>
     )

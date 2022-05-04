@@ -4,6 +4,7 @@ import EmpoyeeAddition from './EmployeeAddition';
 import { Link } from 'react-router-dom';
 import{ButtonGroup,Button,Table} from 'reactstrap';
 
+
 function EmployeeTable() {
     
   const [employees,setEmployees] = useState([]);
@@ -73,7 +74,7 @@ function EmployeeTable() {
       </Table>
       </div>
       
-    
+      <Button block outline color='warning' href= {"/"}>LogOut</Button>
       
       </div>
       )
