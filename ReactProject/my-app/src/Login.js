@@ -2,6 +2,8 @@ import React,{useEffect, useState} from 'react';
 import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import {Button} from "@mui/material"
 
+
+
 function Login(){
 
     const [user,setUser] = useState({
@@ -30,6 +32,8 @@ function Login(){
             {
             mode:'cors',
             method: 'POST',
+            //credentials: 'include',
+            credentials:'include',
             headers: { 
                 'accept': 'application/json',
                 'content-type': 'application/json'

@@ -18,14 +18,15 @@ const pool = new Pool({
 
 //GET all employees
 const getEmployees = async(request, response) => {
-    console.log('starting async query')
-    await pool.query('SELECT * FROM Employee ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-    console.log('async query finished')
+  console.log(request.cookies.token) 
+  console.log('starting async query')
+  await pool.query('SELECT * FROM Employee ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+  console.log('async query finished')
 }
 
 const getEmployeeById = async(request, response) => {
@@ -108,7 +109,7 @@ const loginUser = async(request,response) => {
     if(error){
       throw error;
     }
-    console.log(result.rows)
+    
     if(result.rows.length > 0){
       const dbPass = result.rows[0].password
       bcrypt.compare(password, dbPass)
@@ -122,6 +123,13 @@ const loginUser = async(request,response) => {
           const user = result.rows[0]
           //const id = result.rows[0].id
           const accessToken = createTokens(user)
+          response.cookie('token',accessToken,{
+            maxAge: 60*60*24 ,
+            httpOnly:true,
+            secure:true,
+                      
+         })
+          response.locals.accessToken = accessToken
           response.json({auth: true, token:accessToken, result:result.rows})
           // res.cookie("access-token", accessToken, {
           //   maxAge: 60 * 60 * 24 * 30 * 1000,

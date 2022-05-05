@@ -19,15 +19,14 @@ app.use(
 )
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'http://localhost:3000',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
-app.use(cors())
+var corsOptions = {
+  origin: ' http://localhost:5000',
+  credentials: true,
+}
+app.use(cors(corsOptions))
 //Root Endpoint
 app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' })
-  //response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 })
 
 app.listen(port, () => {

@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
+import {AuthContext} from './GlobalStates.js';
 import EmployeeRow from './EmployeeRow';
 import EmpoyeeAddition from './EmployeeAddition';
 import { Link } from 'react-router-dom';
@@ -8,26 +9,46 @@ import{ButtonGroup,Button,Table} from 'reactstrap';
 function EmployeeTable() {
     
   const [employees,setEmployees] = useState([]);
+ // const [authState,setauthState] = useContext(AuthContext);
 
-  useEffect(() => {
+  // isAuthenticated = async ()=>{
+  //   return await fetch(`<your domain>/isAuth`,{ 
+  //   method:'GET'
+  //   })
+  //   .then(response=>response.json() )
     
-      fetch('http://localhost:8080/employees',
-        {
-         mode:'cors',
-         headers:{
-           "x-access-token": localStorage.getItem("token")
-          }
-        })
-      .then(response => {
-        return response.json()
-      })
-      .then((result) => {
-        setEmployees(result);
-        console.log(result);
-      })
+  //   .catch(err=>console.log(err))
     
-  },[]);
-         //THELEI mode:'cors'
+  //   };
+
+  useEffect(() => {    
+    fetch('http://localhost:8080/employees',
+    {
+      mode:'cors',
+      headers:{
+        "x-access-token": localStorage.getItem("token")
+      }
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then((result) => {
+      setEmployees(result);
+      // isAuthenticated().then(data,error =>{
+      //   if(error){
+      //     throw error
+      //   }
+      //   else{
+      //     setauthState({...authState,id:result.id,
+      //       last_name:result.last_name,
+      //       first_name:result.first_name,
+      //       isActive:result.isActive,
+      //       date_of_birth:result.date_of_birth})  
+      //     }
+      //  })
+      })  
+      },[]);
+         
   async function handleDeleteClick(id){
     console.log(id);
     await fetch(`http://localhost:8080/employee/${id}`, {
@@ -80,7 +101,7 @@ function EmployeeTable() {
       </Table>
       </div>
       
-      <Button block outline color='warning' href= {"/"}>LogOut</Button>
+      <Button block outline color='warning' onClick={()=>{localStorage.removeItem("token")}} tag={Link} to= {"/"}>LogOut</Button>
       
       </div>
       )
