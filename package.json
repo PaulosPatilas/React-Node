@@ -2,6 +2,10 @@
   "name": "mysqlexperiment",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "18.0.0",
+    "npm": "8.6.0"
+  },
   "main": "myprogram.js",
   "scripts": {
     "start":"node myprogram.js",
