@@ -3,11 +3,21 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8080
 const cookieParser = require("cookie-parser");
 const { validateToken } = require("./JWT");
 const cors = require('cors')
 const db = require('./querries');
+const path = require('path')
+
+const corsOptions = {
+  origin: ' http://localhost:5000',
+  credentials: true,
+}
+
+
+//Process.env.NODE_ENV indicates if we are on production enviroment or not 
+
 
 
 app.use(cookieParser())
@@ -18,21 +28,22 @@ app.use(
   })
 )
 app.use(express.json());
-
-var corsOptions = {
-  origin: ' http://localhost:5000',
-  credentials: true,
-}
 app.use(cors(corsOptions))
+
+
 //Root Endpoint
 app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' })
 })
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
 
+
+if(process.env.NODE_ENV === 'production'){
+  //server static content 
+  app.use(express.static(path.join(__dirname,'ReactProject/build')))
+}
 
 //CRUD ROUTES
 app.get('/employees',validateToken ,db.getEmployees)

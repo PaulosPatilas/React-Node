@@ -1,19 +1,27 @@
-//const express = require("express");
-// const app = express();
-// const cors = require('cors')
 const { createTokens } = require("./JWT");
 const bcrypt = require("bcrypt");
+
 //Connecting to a Postgres database from Node.js 
 //In a production environment, you would want to put your configuration details 
 //in a separate file with restrictive permissions that is not accessible from version control
+
+
+//Development enviroment configuration 
+const devConfig = {
+  user: process.env.PG_USER,
+  password:process.env.PG_PASSWORD,
+  host:process.env.PG_HOST,
+  port:process.env.PG_PORT,
+  database:process.env.PG_DATABASE
+}
+
+//Production enviroment configuration
+const prodConfig = {
+  connectionString: process.env.DATABASE_URL // This is coming from Heroku addon for postgresql
+}
+
 const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'knowledge',
-  password: '12345',
-  port: 5432,
-})
+const pool = new Pool(process.env.NODE_ENV === 'production'? prodConfig : devConfig)
 
 
 //GET all employees
