@@ -39,7 +39,7 @@ console.log("Our Enviroment is " + process.env.NODE_ENV)
 
 if(process.env.NODE_ENV === 'production'){
   //server static content 
-  app.use(express.static(path.join(__dirname,'ReactProject/build')))
+  app.use(express.static(path.join(__dirname,'ReactProject/my-app/build')))
 }
 
 //CRUD ROUTES
