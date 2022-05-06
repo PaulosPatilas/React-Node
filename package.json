@@ -4,8 +4,8 @@
   "description": "",
   "main": "myprogram.js",
   "scripts": {
-    "heroku-poststart": "cd ReactProject && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node myprogram.js",
+    "heroku-postbuild": "cd ReactProject && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

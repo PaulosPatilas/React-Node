@@ -1,12 +1,12 @@
 
 //Setting up an Express.js server
 const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const port = process.env.PORT || 8080
 const cookieParser = require("cookie-parser");
 const { validateToken } = require("./JWT");
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const app = express()
+const port = process.env.PORT || 8080
 const db = require('./querries');
 const path = require('path')
 
@@ -15,10 +15,7 @@ const corsOptions = {
   credentials: true,
 }
 
-
 //Process.env.NODE_ENV indicates if we are on production enviroment or not 
-
-
 
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -27,9 +24,9 @@ app.use(
     extended: true,
   })
 )
+
 app.use(express.json());
 app.use(cors(corsOptions))
-
 
 //Root Endpoint
 app.get('/', (request, response) => {
