@@ -15,6 +15,7 @@ function EmployeeTable() {
   //   return await fetch(`<your domain>/isAuth`,{ 
   //   method:'GET'
   //   })
+
   //   .then(response=>response.json() )
     
   //   .catch(err=>console.log(err))
@@ -22,7 +23,7 @@ function EmployeeTable() {
   //   };
 
   useEffect(() => {    
-    fetch('http://localhost:8080/employees',
+    fetch('/employees',
     {
       mode:'cors',
       headers:{
@@ -51,7 +52,7 @@ function EmployeeTable() {
          
   async function handleDeleteClick(id){
     console.log(id);
-    await fetch(`http://localhost:8080/employee/${id}`, {
+    await fetch(`/employee/${id}`, {
       mode:'cors',
       credentials:'include',
       method: 'DELETE',

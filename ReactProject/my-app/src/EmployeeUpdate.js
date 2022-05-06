@@ -42,7 +42,7 @@ function EmployeeUpdate() {
 
   useEffect(async () => {
     console.log('useEffect is Working...')
-    await fetch(`http://localhost:8080/employee/${id}`, {
+    await fetch(`/employee/${id}`, {
       mode:'cors',
       headers:{ "x-access-token": localStorage.getItem("token"),}
     })
@@ -70,7 +70,7 @@ function EmployeeUpdate() {
     employee.date_of_birth = employee.date_of_birth.substring(0,10);
     console.log('HandleSubmit is Working for Employee:'+ JSON.stringify(employee));
     
-    await fetch(`http://localhost:8080/employee/${employee.id}`,
+    await fetch(`/employee/${employee.id}`,
     {
       mode:'cors',
       method: 'PUT',

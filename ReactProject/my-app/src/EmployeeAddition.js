@@ -36,7 +36,7 @@ function EmployeeAddition() {
         }
         else {
         setEmployee(newEmployee.is_active=checked);
-        await fetch(`http://localhost:8080/employee`,
+        await fetch(`/employee`,
         {
           mode:'cors',
           method: 'POST',
