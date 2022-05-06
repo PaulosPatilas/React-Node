@@ -52,8 +52,11 @@ function EmployeeTable() {
   async function handleDeleteClick(id){
     console.log(id);
     await fetch(`http://localhost:8080/employee/${id}`, {
+      mode:'cors',
+      credentials:'include',
       method: 'DELETE',
       headers: {
+        "x-access-token": localStorage.getItem("token"),
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }

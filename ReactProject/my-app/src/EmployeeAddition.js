@@ -41,6 +41,7 @@ function EmployeeAddition() {
           mode:'cors',
           method: 'POST',
           headers: { 
+            "x-access-token": localStorage.getItem("token"),
             'accept': 'application/json',
             'content-type': 'application/json'
           },
@@ -86,7 +87,7 @@ function EmployeeAddition() {
               </FormGroup>
               <FormGroup>
                 <Button outline color="primary" type="submit">Add</Button>
-                <Button outline color="secondary" tag={Link} to="/">Cancel</Button>
+                <Button outline color="secondary" tag={Link} to="/home">Cancel</Button>
               </FormGroup>
             </Form>
           </Container>

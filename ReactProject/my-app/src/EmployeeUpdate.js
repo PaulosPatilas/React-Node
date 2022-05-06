@@ -42,7 +42,10 @@ function EmployeeUpdate() {
 
   useEffect(async () => {
     console.log('useEffect is Working...')
-    await fetch(`http://localhost:8080/employee/${id}`, {mode:'cors'})
+    await fetch(`http://localhost:8080/employee/${id}`, {
+      mode:'cors',
+      headers:{ "x-access-token": localStorage.getItem("token"),}
+    })
     .then(response => {
       return response.json()
     })
@@ -72,6 +75,7 @@ function EmployeeUpdate() {
       mode:'cors',
       method: 'PUT',
       headers: { 
+        "x-access-token": localStorage.getItem("token"),
         'accept': 'application/json',
         'content-type': 'application/json'
       },
@@ -115,8 +119,8 @@ function EmployeeUpdate() {
                 onChange={() => setChecked(!checked)} autoComplete="isActive"/>
             </FormGroup>
             <FormGroup>
-              <Button outline color="primary" type="submit"  >Save</Button>{/*tag={Link} to="/" */}
-              <Button outline color="secondary" tag={Link} to="/">Cancel</Button>
+              <Button outline color="primary" type="submit"  tag={Link} to="/home">Save</Button>{/*tag={Link} to="/" */}
+              <Button outline color="secondary" tag={Link} to="/home">Cancel</Button>
             </FormGroup>
           </Form>
         </Container>

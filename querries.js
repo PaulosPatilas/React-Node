@@ -1,6 +1,6 @@
 const { createTokens } = require("./JWT");
 const bcrypt = require("bcrypt");
-
+require('dotenv').config();
 //Connecting to a Postgres database from Node.js 
 //In a production environment, you would want to put your configuration details 
 //in a separate file with restrictive permissions that is not accessible from version control
@@ -84,7 +84,7 @@ const updateEmployee = async(request, response) => {
 //DELETE an Employee
 const deleteEmployee = async(request, response) => {
     const id = parseInt(request.params.id)
-  
+    console.log('asdasdasd'+id);
     await pool.query('DELETE FROM Employee WHERE id = $1', [id], (error, results) => {
       if (error) {
         throw error

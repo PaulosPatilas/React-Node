@@ -5,7 +5,7 @@ const createTokens = (user) => {
     const accessToken = sign(
         { username: user.username, id: user.id },
         "jwtsecretplschange",
-       { expiresIn: 30000 }
+       { expiresIn: 3000 }
     );
     return accessToken;
 };

@@ -11,7 +11,7 @@ const db = require('./querries');
 const path = require('path')
 
 const corsOptions = {
-  origin: ' http://localhost:5000',
+  origin: ' http://localhost:3000',
   credentials: true,
 }
 
@@ -38,7 +38,7 @@ app.get('/', (request, response) => {
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
-
+console.log("Our Enviroment is " + process.env.NODE_ENV)
 
 if(process.env.NODE_ENV === 'production'){
   //server static content 
