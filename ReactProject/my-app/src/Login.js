@@ -28,7 +28,7 @@ function Login(){
     async function handleSubmit(e){
         e.preventDefault();
         console.log("works")
-        await fetch('http://localhost:8080/login',
+        await fetch('/login',
             {
             mode:'cors',
             method: 'POST',
